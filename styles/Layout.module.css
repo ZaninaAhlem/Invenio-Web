@@ -1,0 +1,136 @@
+.header {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -2px;
+  background-color: var(--nav-bg-color);
+  box-shadow: 0px 10px 75px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header label,
+.header p,
+.header a,
+.header h1,
+.header li {
+  color: var(--text-accent);
+}
+
+.headerTop {
+  width: 1560px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.headerTop .leftSection,
+.headerTop .rightSection {
+  display: flex;
+  align-items: center;
+}
+
+.appName {
+  font-size: 18px;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.userName {
+  font-size: 18px;
+}
+
+.line {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  height: 20px;
+  margin: 0 20px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.actions a {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.actions a label {
+  cursor: pointer;
+}
+
+.navAction {
+  margin-left: 10px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.actions a:hover .navAction {
+  opacity: 1;
+}
+
+.user {
+  font-size: 14;
+  opacity: 0.7;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile > div {
+  border-radius: 50%;
+}
+
+.profile p {
+  margin-right: 15px;
+}
+
+.nav {
+  width: 1560px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.nav ul {
+  display: flex;
+}
+
+.nav ul li {
+  opacity: 0.8;
+  padding: 20px;
+}
+
+.nav ul li.selected {
+  opacity: 1;
+  border-bottom: 2px solid #fff;
+  border-top: 2px solid transparent;
+}
+
+.nav ul li a span {
+  font-weight: 300;
+}
+
+.plus {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  bottom: -25px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  border-radius: 28px;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+}
