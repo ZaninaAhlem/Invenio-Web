@@ -1,0 +1,36 @@
+.card {
+  width: 280px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.15);
+  margin: 15px;
+  height: 300px;
+}
+
+.vector {
+  width: 100px;
+  position: absolute;
+  margin-top: -25px;
+  margin-left: 180px;
+}
+
+.settingsIcon {
+  position: absolute;
+  top: 5px;
+  right: 37px;
+  background-color: #066;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.details {
+  padding: 5px 15px;
+}
+
+.details p {
+  font-family: "Times New Roman", Times, serif;
+}
