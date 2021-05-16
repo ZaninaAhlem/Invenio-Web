@@ -1,19 +1,20 @@
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Layout.module.css";
 
 export default function Layout({ children }) {
   return (
     <>
       <div className={styles.header}>
         <section className={styles.headerTop}>
-          <div>
+          <div className={styles.leftSection}>
             <Image src="/logo.svg" alt="logo" width="24px" height="30px" />
-            <p style={{ fontSize: 18, marginLeft: 20 }}>Invenio</p>
-            <div className={styles.line}></div>
-            <p style={{ fontSize: 18 }}>ADEA</p>
+            <h1 className={styles.appName}>Invenio</h1>
+            <hr className={styles.line} />
+            <p className={styles.userName}>ADEA</p>
           </div>
-          <div>
-            <div className={styles.notifacations}>
+
+          <div className={styles.rightSection}>
+            <div className={styles.actions}>
               <a href="/.">
                 <Image
                   src="/notification.svg"
@@ -21,10 +22,9 @@ export default function Layout({ children }) {
                   width="18px"
                   height="18px"
                 />
-                <p style={{ fontSize: 11, opacity: 0.7, marginLeft: 8 }}>
-                  Notification
-                </p>
+                <label className={styles.navAction}>Notification</label>
               </a>
+
               <a href="/.">
                 <Image
                   src="/message.svg"
@@ -32,35 +32,41 @@ export default function Layout({ children }) {
                   width="18px"
                   height="18px"
                 />
-                <p style={{ fontSize: 11, opacity: 0.7, marginLeft: 8 }}>
-                  Message
-                </p>
+                <label className={styles.navAction}>Message</label>
               </a>
             </div>
-            <div className={styles.line}></div>
-            <p style={{ fontSize: 14, opacity: 0.8 }}>ADEA</p>
-            <a href="/.">
+
+            <hr className={styles.line} />
+            <a href="/." className={styles.profile}>
+              <p className={styles.user}>ADEA</p>
               <Image
                 src="/profileImage.png"
                 alt="profile image"
-                width="60px"
-                height="60px"
+                width="30"
+                height="30"
+                objectFit="cover"
               />
             </a>
           </div>
         </section>
-        <section className={styles.headerBottom}>
+
+        <section className={styles.nav}>
           <ul>
+            <li className={styles.selected}>
+              <a href="./">
+                <span>Mes formations</span>
+              </a>
+            </li>
             <li>
               <a href="./">
-                <p>Mes formations</p>
+                <span>Mes formations</span>
               </a>
             </li>
           </ul>
+          <button className={styles.plus}>
+            <Image src="/plus.svg" height="28px" width="28px" />
+          </button>
         </section>
-        <button className={styles.plus}>
-          <Image src="/plus.svg" height="28px" width="28px" />
-        </button>
       </div>
       {children}
     </>

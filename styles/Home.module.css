@@ -6,66 +6,25 @@
 }
 
 .main {
-  flex: 1;
+  width: 100%;
+  height: calc(100% - 100px);
+  overflow: auto;
+}
+
+.cards__container {
+  width: 100%;
+  max-width: 1560px;
+  height: auto;
   display: flex;
-  flex-direction: row;
-  padding: 50px;
   flex-wrap: wrap;
-}
-
-.header {
-  height: 140px;
-  background: #1f2533;
-  box-shadow: 0px 10px 75px 4px rgba(0, 0, 0, 0.05);
   justify-content: center;
+  margin: auto;
+  gap: 20px;
+  padding: 30px 0;
 }
-
-.header p {
-  color: #fff;
-  font-family: Poppins;
-}
-
-.headerTop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.headerTop div a,
-.headerTop div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.headerTop a {
-  margin: 0 30px 0 10px;
-  padding: 5px 10px;
-}
-
-.headerTop .notifacations a:hover {
-  text-decoration: underline;
-  text-decoration-color: #fff;
-}
-
-.line {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  height: 20px;
-  margin: 0 20px;
-}
-
-.plus {
-  display: flex;
-  background-color: #006666;
-  height: 50px;
-  width: 50px;
-  border-radius: 28px;
-  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 105px;
-  right: 16%;
+.cards__container i {
+  width: 375px;
+  height: 1px;
 }
 
 .footer {
