@@ -74,3 +74,38 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.settings {
+  position: absolute;
+  top: -65px;
+  left: -85px;
+  z-index: 999;
+  background: #ffffff;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  height: 70px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 3px 0;
+  background-color: #fff;
+  opacity: 0.8;
+}
+
+.settings button:hover {
+  opacity: 0.9;
+}
+
+.settings button p {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 10px;
+}

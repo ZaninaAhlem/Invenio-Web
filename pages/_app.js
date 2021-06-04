@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 import Layout from "../components/layout";
+import React from "react";
+import { wrapper } from "../redux/store";
 
-function MyApp({ Component, pageProps }) {
-  return (
-    // <Layout>
+const MyApp = ({ Component, pageProps }) => (
+  <Layout>
     <Component {...pageProps} />
-    // </Layout>
-  );
-}
+  </Layout>
+);
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

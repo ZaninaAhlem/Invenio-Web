@@ -1,7 +1,12 @@
+import { useState } from "react";
 import Image from "next/image";
+import Router from "next/router";
+import Link from "next/link";
+import Messages from "./messages";
 import styles from "../styles/Layout.module.css";
 
 export default function Layout({ children }) {
+  const [selected, setSelected] = useState("formations");
   return (
     <>
       <div className={styles.header}>
@@ -14,30 +19,13 @@ export default function Layout({ children }) {
           </div>
 
           <div className={styles.rightSection}>
-            <div className={styles.actions}>
-              <a href="/.">
-                <Image
-                  src="/notification.svg"
-                  alt="notification"
-                  width="18px"
-                  height="18px"
-                />
-                <label className={styles.navAction}>Notification</label>
-              </a>
-
-              <a href="/.">
-                <Image
-                  src="/message.svg"
-                  alt="message"
-                  width="18px"
-                  height="18px"
-                />
-                <label className={styles.navAction}>Message</label>
-              </a>
-            </div>
-
-            <hr className={styles.line} />
-            <a href="/." className={styles.profile}>
+            <a
+              className={styles.profile}
+              onClick={() => {
+                Router.push("/profile");
+                setSelected("");
+              }}
+            >
               <p className={styles.user}>ADEA</p>
               <Image
                 src="/profileImage.png"
@@ -52,23 +40,53 @@ export default function Layout({ children }) {
 
         <section className={styles.nav}>
           <ul>
-            <li className={styles.selected}>
-              <a href="./">
+            <li
+              onClick={() => {
+                setSelected("formations");
+                Router.push("/");
+              }}
+              className={selected === "formations" ? styles.selected : null}
+            >
+              <a>
                 <span>Mes formations</span>
               </a>
             </li>
-            <li>
-              <a href="./">
-                <span>Mes formations</span>
+            <li
+              onClick={() => {
+                setSelected("formateurs");
+                Router.push("/formateurs");
+              }}
+              className={selected === "formateurs" ? styles.selected : null}
+            >
+              <a>
+                <span>Mes formateurs</span>
+              </a>
+            </li>
+            <li
+              onClick={() => {
+                setSelected("inscrits");
+                Router.push("/inscrits");
+              }}
+              className={selected === "inscrits" ? styles.selected : null}
+            >
+              <a>
+                <span>Mes inscrits</span>
               </a>
             </li>
           </ul>
-          <button className={styles.plus}>
+          <button
+            className={styles.plus}
+            onClick={() => {
+              Router.push("/form");
+              setSelected("");
+            }}
+          >
             <Image src="/plus.svg" height="28px" width="28px" />
           </button>
         </section>
       </div>
       {children}
+      <Messages />
     </>
   );
 }

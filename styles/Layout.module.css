@@ -19,6 +19,7 @@
 
 .headerTop {
   width: 1560px;
+  max-width: 80%;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -47,33 +48,6 @@
   height: 20px;
   margin: 0 20px;
 }
-
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-}
-
-.actions a {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.actions a label {
-  cursor: pointer;
-}
-
-.navAction {
-  margin-left: 10px;
-  font-size: 13px;
-  opacity: 0.7;
-}
-
-.actions a:hover .navAction {
-  opacity: 1;
-}
-
 .user {
   font-size: 14;
   opacity: 0.7;
@@ -94,6 +68,7 @@
 
 .nav {
   width: 1560px;
+  max-width: 80%;
   height: 60px;
   position: relative;
   display: flex;
@@ -110,7 +85,7 @@
   padding: 20px;
 }
 
-.nav ul li.selected {
+.selected {
   opacity: 1;
   border-bottom: 2px solid #fff;
   border-top: 2px solid transparent;
@@ -132,5 +107,5 @@
   background-color: var(--primary);
   border-radius: 28px;
   box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);
-  z-index: 99999;
+  z-index: 9999;
 }

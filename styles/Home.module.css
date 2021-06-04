@@ -42,3 +42,21 @@
     flex-direction: column;
   }
 }
+
+.emptyCard {
+  width: 1280px;
+  height: 186px;
+  max-width: 80%;
+  background: #ffffff;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.05);
+  border-radius: 12px;
+  padding: 40px 50px;
+}
+
+.emptyCard p {
+  font-family: "Sofia Pro";
+  font-style: italic;
+  font-weight: 500;
+  line-height: 150%;
+  color: #b6b6b6;
+}

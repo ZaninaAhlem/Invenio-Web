@@ -1,0 +1,136 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+  flex-direction: column;
+  scroll-behavior: smooth;
+}
+
+.main {
+  width: 1280px;
+  height: 555px;
+  max-width: 80%;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.05);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  padding: 30px 40px;
+}
+
+.imageHolder {
+  width: 450px;
+  height: 290px;
+  background-color: #f3f5f8;
+  border: 1px dashed #ced5de;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.uploadButton {
+  position: relative;
+  width: 100px;
+  height: 38px;
+  left: 170px;
+  top: 200px;
+  background: #006666;
+  color: #ffffff;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);
+  border-radius: 34px;
+}
+
+.formContainer {
+  width: 830px;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.formContainer label {
+  font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #2a2b30;
+  margin-bottom: 10px;
+}
+
+.formContainer textarea,
+.formContainer input {
+  background: #ffffff;
+  border: 1px solid #ced5de;
+  box-sizing: border-box;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  height: 50px;
+  width: 500px;
+
+  font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  padding: 16px;
+  color: #000000;
+}
+
+.formContainer textarea:focus,
+.formContainer input:focus {
+  box-shadow: 0px 0px 0px 5px rgba(0, 102, 102, 0.1);
+  border-color: #006666;
+}
+
+.inscriptionForm {
+  width: 1280px;
+  max-width: 80%;
+  /* height: 223px; */
+  height: auto;
+  background: #ffffff;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.05);
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.inscriptionForm div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inscriptionForm h3 {
+  margin-bottom: 30px;
+  font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 150%;
+  color: #2a2b30;
+}
+
+.inscriptionForm span {
+  width: 500px;
+  max-width: 45%;
+  font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  color: #2a2b30;
+}
+
+.plus {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  border-radius: 28px;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);
+}
