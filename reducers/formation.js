@@ -12,6 +12,8 @@ const formation = (state = [], action) => {
       return state.filter((post) => post._id !== action.payload);
     case "GET_INSCRITS":
       return { ...state, inscrits: action.payload };
+    case "POST_IMAGE":
+      return { ...state, imageId: action.payload };
     default:
       return state;
   }

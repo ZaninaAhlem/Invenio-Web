@@ -41,6 +41,16 @@ export const updateFormation = (id) => async (dispatch) => {
   }
 };
 
+export const postImage = (imageData) => async (dispatch) => {
+  try {
+    const { data } = await api.postImage(imageData);
+    dispatch({ type: "POST_IMAGE", payload: data });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getInscrits = (id) => async (dispatch) => {
   try {
     const { data } = api.getInscrits(id);

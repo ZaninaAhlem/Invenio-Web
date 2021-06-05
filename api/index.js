@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://c0336ddeb65d.ngrok.io" });
+const API = axios.create({ baseURL: "https://343135c03e98.ngrok.io" });
 
 export const signIn = (formData) => API.post("/centers/login", formData);
 export const signUp = (formData) => API.post("/centers", formData);
@@ -54,6 +54,7 @@ export const updateFormation = (id, formData) =>
       Authorization: `Bearer ${localStorage.getItem("userToken")}`,
     },
   });
+export const postImage = (imageData) => API.post("upload", imageData);
 export const getInscrits = (id) => API.get(`/formations/inscriptions/${id}`);
 
 export const getMessages = (room) => API.get(`/centers/${room}`);

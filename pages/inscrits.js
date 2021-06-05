@@ -9,13 +9,6 @@ import { getFormations, getInscrits } from "../actions/Formations";
 function Inscrits(props) {
   const { posts } = props.formations;
 
-  const [inscrits, setInscrits] = useState([
-    {
-      name: "Lakrech Lamia",
-      avatar: "/profileImage.png",
-    },
-  ]);
-
   useEffect(() => {
     if (process.browser) {
       let id = localStorage.getItem("userId");
@@ -23,7 +16,7 @@ function Inscrits(props) {
     }
   }, []);
 
-  const getInscrits = (formation) => {
+  const getInscriptions = (formation) => {
     props.getInscrits(formation._id).then((data) => console.log(data));
   };
 
@@ -37,7 +30,7 @@ function Inscrits(props) {
       <main className={styles.main}>
         {posts &&
           posts.map((formation, index) => {
-            getInscrits(formation);
+            getInscriptions(formation);
           })}
         {/* {inscrits.map((inscrit, index) => {
           return <InformationCard key={index} item={inscrit} />;

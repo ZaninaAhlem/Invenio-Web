@@ -5,16 +5,15 @@ import Router from "next/router";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageUploading from "react-images-uploading";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import dataUriToBuffer from "data-uri-to-buffer";
 
 import styles from "../styles/Form.module.css";
 import FormField from "../components/formField";
-import { postFormation } from "../actions/Formations";
+import { postFormation, postImage } from "../actions/Formations";
 
-export default function Form() {
-  const dispatch = useDispatch();
-
+function Form(props) {
+  const [selectedImage, setSelectedImage] = useState(null);
   const [formFields, setFormFields] = useState([
     {
       label: "",
@@ -34,17 +33,9 @@ export default function Form() {
     setFormData({ ...formData, [field]: value });
   };
 
-  const onImageChange = (imageList) => {
-    const image = imageList[0].data_url;
-    // setFormData({ ...formData, image: image });
-    // console.log(image);
-    var decoded = dataUriToBuffer(image);
-    console.log(decoded);
-  };
-
   const addPost = (e) => {
     e.preventDefault();
-    dispatch(postFormation(formData)).then((data) => {
+    props.postFormation(formData).then((data) => {
       if (data) {
         Router.push("/");
       } else console.log("no data");
@@ -52,7 +43,7 @@ export default function Form() {
   };
 
   const changeHandler = (index, field) => {
-    console.log(field);
+    // console.log(field);
   };
 
   return (
@@ -63,48 +54,28 @@ export default function Form() {
       </Head>
       <div className={styles.container}>
         <main className={styles.main}>
-          <ImageUploading
-            value={formData.image}
-            onChange={onImageChange}
-            dataURLKey="data_url"
-            className={styles.imageUploader}
+          <form
+            className={styles.imageHolder}
+            method="post"
+            encType="multipart/form-data"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData();
+              formData.append("file", selectedImage);
+              props
+                .postImage(formData)
+                .then((data) => setFormData({ ...formData, image: data }));
+            }}
           >
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemoveAll,
-              onImageUpdate,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              // write your building UI
-              <div>
-                <h3>Inofrmation du formation</h3>
-                {formData.image ? (
-                  <div className="image-item">
-                    <img src={formData.image} alt="" width="300" />
-                    <div className="image-item__btn-wrapper">
-                      <button onClick={() => onImageUpdate(0)}>Update</button>
-                      &nbsp;
-                      <button onClick={() => onImageRemove(0)}>Remove</button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className={styles.imageHolder}>
-                    <button
-                      className={styles.uploadButton}
-                      style={isDragging ? { color: "red" } : undefined}
-                      onClick={onImageUpload}
-                      {...dragProps}
-                    >
-                      Parcourir
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-          </ImageUploading>
+            <input
+              type="file"
+              name="file"
+              onChange={(e) => setSelectedImage(e.target.files[0])}
+            />
+            <button type="submit" value="Submit">
+              <span>Submit</span>
+            </button>
+          </form>
           <div className={styles.formContainer}>
             <label htmlFor="Title">Title</label>
             <input
@@ -162,3 +133,15 @@ export default function Form() {
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  formations: state.formation,
+  imageId: state.formation,
+});
+
+const mapDispatchToProps = {
+  postFormation,
+  postImage,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

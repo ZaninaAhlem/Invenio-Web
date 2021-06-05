@@ -6,29 +6,29 @@ import { getFormations } from "../actions/Formations";
 import { connect } from "react-redux";
 
 function Home(props) {
-  // const { posts } = props.formations;
-  const [posts, setPosts] = useState([
-    {
-      key: 1,
-      title: "Devenez UX Designer",
-      description: `Le parcours UX Design vous permettra d’acquérir des connaissances et
-          des outils nécessaires pour comprendre les différents principes de la
-          conception de l'expérience utilisateur, d'effectuer une bonne étude
-          UX, d'utiliser les différents types de processus afin de
-          conceptualiser un produit final dans une optique centrée utilisateur.`,
-      image: "/cardImage.png",
-    },
-    {
-      key: 1,
-      title: "Devenez UX Designer",
-      description: `Le parcours UX Design vous permettra d’acquérir des connaissances et
-          des outils nécessaires pour comprendre les différents principes de la
-          conception de l'expérience utilisateur, d'effectuer une bonne étude
-          UX, d'utiliser les différents types de processus afin de
-          conceptualiser un produit final dans une optique centrée utilisateur.`,
-      image: "/cardImage.png",
-    },
-  ]);
+  const { posts } = props.formations;
+  // const [posts, setPosts] = useState([
+  //   {
+  //     key: 1,
+  //     title: "Devenez UX Designer",
+  //     description: `Le parcours UX Design vous permettra d’acquérir des connaissances et
+  //         des outils nécessaires pour comprendre les différents principes de la
+  //         conception de l'expérience utilisateur, d'effectuer une bonne étude
+  //         UX, d'utiliser les différents types de processus afin de
+  //         conceptualiser un produit final dans une optique centrée utilisateur.`,
+  //     image: "/cardImage.png",
+  //   },
+  //   {
+  //     key: 1,
+  //     title: "Devenez UX Designer",
+  //     description: `Le parcours UX Design vous permettra d’acquérir des connaissances et
+  //         des outils nécessaires pour comprendre les différents principes de la
+  //         conception de l'expérience utilisateur, d'effectuer une bonne étude
+  //         UX, d'utiliser les différents types de processus afin de
+  //         conceptualiser un produit final dans une optique centrée utilisateur.`,
+  //     image: "/cardImage.png",
+  //   },
+  // ]);
 
   //local variables
   let fillers = [];
