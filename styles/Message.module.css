@@ -73,8 +73,6 @@ top: 1004px; */
   padding: 11px 0 11px 20px;
 }
 
-/* ::-webkit-input-placeholder {color: black;} */
-
 .sendButton {
   position: absolute;
   left: 260px;

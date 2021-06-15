@@ -4,8 +4,7 @@ import Router from "next/router";
 import { connect } from "react-redux";
 
 import styles from "../styles/Login.module.css";
-import InputField from "../components/inputField";
-import { signIn } from "../actions/auth";
+import { signIn, signUp } from "../actions/auth";
 
 function Login(props) {
   const [form, setForm] = useState({
@@ -138,6 +137,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   signIn,
+  signUp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

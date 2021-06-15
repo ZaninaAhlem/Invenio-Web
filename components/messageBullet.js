@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import styles from "../styles/Message.module.css";
 import { getUser } from "../actions/auth";
 
-export default function MessageBullet({ room, uri, onSelect }) {
+export default function MessageBullet({ room, onSelect }) {
   const dispatch = useDispatch();
   const [userAvatar, setUserAvatar] = useState("");
 
@@ -15,7 +15,13 @@ export default function MessageBullet({ room, uri, onSelect }) {
 
   return (
     <button className={styles.messageBullet} onClick={() => onSelect()}>
-      <img src={{ uri: userAvatar }} width="40" height="40" />
+      {userAvatar && (
+        <img
+          src={`http://localhost:3080/upload/${userAvatar}.png`}
+          width="40"
+          height="40"
+        />
+      )}
     </button>
   );
 }

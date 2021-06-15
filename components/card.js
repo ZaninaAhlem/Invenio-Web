@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Router from "next/image";
+import Link from "next/link";
 import { connect } from "react-redux";
 
 import styles from "../styles/Card.module.css";
-import { deleteFormation } from "../actions/Formations";
+import { deleteFormation, getImage } from "../actions/Formations";
 
 function Card(props) {
   const [isVisible, setIsVisible] = useState(false);
+  // const [image, setImage] = useState("");
+
+  useEffect(() => {
+    props.getImage(props.post.image);
+  }, []);
 
   return (
     <div className={styles.card}>
       {props.post.image && (
-        <Image src={props.post.image} height="280" width="375" />
+        <img
+          src={`http://localhost:3080/upload/${props.post.image}.png`}
+          height="280"
+          width="375"
+        />
       )}
 
       <div className={styles.vector} onClick={() => setIsVisible(!isVisible)}>
@@ -27,10 +37,18 @@ function Card(props) {
         </button>
         {isVisible && (
           <div className={styles.settings}>
-            <button onClick={() => Router.push("/form")}>
-              <Image src="/edit-2.svg" width="15px" height="15px" />
-              <p>Modifier</p>
-            </button>
+            <Link
+              href={{ pathname: "/form", query: { formation: props.post._id } }}
+            >
+              <button
+              // onClick={() =>
+              //   Router.push({ pathname: "/form", query: { name: "hey" } })
+              // }
+              >
+                <img src="/edit-2.svg" width="15px" height="15px" />
+                <p>Modifier</p>
+              </button>
+            </Link>
             <button onClick={() => props.deleteFormation(props.post._id)}>
               <Image src="/trash-2.svg" width="15px" height="15px" />
               <p>Supprimer</p>
@@ -52,6 +70,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   deleteFormation,
+  getImage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

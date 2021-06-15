@@ -1,7 +1,7 @@
 import * as api from "../api/index";
 
 import io from "socket.io-client";
-let socket = io("https://ea3bafc96045.ngrok.io");
+let socket = io("http://localhost:4000");
 
 export const joinRoom = (userId, centerId) => async (dispatch) => {
   socket.emit("join", { userId, centerId }, (error) => {

@@ -50,7 +50,11 @@ input {
   border: 1px solid #e0e2ec;
   padding: 0 0 0 15px;
   border-radius: 12px;
+<<<<<<< HEAD
   min-width: 400px;
+=======
+  /* min-width: 400px; */
+>>>>>>> 342a449... some api added
   display: block;
 }
 
