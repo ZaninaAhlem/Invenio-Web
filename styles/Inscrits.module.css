@@ -1,0 +1,176 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+  height: calc(100% - 100px);
+  overflow: auto;
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.card {
+  width: 1280px;
+  max-width: 80%;
+  background: #ffffff;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.05);
+  border-radius: 12px;
+  padding: 25px;
+  margin: 15px 0;
+  align-content: space-between;
+}
+
+.card h3 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.shownInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shownInfo div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.shownInfo div span {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #006666;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.shownInfo span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.hidenInfo {
+  margin-top: 15px;
+}
+
+.hidenInfo h5 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-family: "Sofia pro";
+  font-weight: 500;
+  line-height: 24px;
+  margin: 7px 10px;
+}
+
+.hidenInfo button {
+  background-color: #ffffff;
+}
+
+.hidenInfo section div,
+.demandCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 10px 0;
+}
+
+.acceptBtn {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px;
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1.5px solid #006666;
+}
+
+.refuseBtn {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px;
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1.5px solid #5e5e5e;
+}
+
+.form {
+  width: 250px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.05);
+  position: absolute;
+  background-color: #ffffff;
+  top: 260px;
+  left: 300px;
+}
+
+.form div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.form section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.form section div {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin: 7px 10px;
+}
+
+.answer {
+  color: var(--text-primary);
+  font-size: 13px;
+  margin: 7px 10px;
+}
+.form button {
+  position: relative;
+  left: 190px;
+  background-color: #ffffff;
+}
+
+.subscriber {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 20px 10px 0;
+}
+
+.hidenInfo p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-family: "Sofia pro";
+  line-height: 18px;
+  margin: 10px 0;
+}

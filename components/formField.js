@@ -1,25 +1,18 @@
 import { useState } from "react";
+import Image from "next/image";
+
 import styles from "../styles/FormField.module.css";
 
-export default function FormField({ onChange }) {
-  const [field, setField] = useState({
-    label: "",
-    type: "",
-  });
+export default function FormField({ changeHandler }) {
+  const [field, setField] = useState("");
   return (
     <div className={styles.inputField}>
       <input
-        onChange={(e) => {
-          console.log(onChange);
-          setField({ ...field, label: e.target.value });
-          // onChange(field);
-        }}
-      />
-      <input
+        placeholder="Label"
         onChange={(e) => {
           setField({ ...field, label: e.target.value });
-          // onChange(field);
         }}
+        onBlur={() => changeHandler(field)}
       />
     </div>
   );

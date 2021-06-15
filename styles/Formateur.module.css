@@ -11,8 +11,9 @@
   overflow: auto;
   padding-top: 50px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .card {
@@ -25,13 +26,43 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 25px;
+  margin: 15px 0;
+}
+
+.card input {
+  font-size: 20px;
+  width: 100%;
+  border-style: none;
+  font-size: 16px;
+}
+
+.card input:focus {
+  border-style: none;
+  box-shadow: none;
 }
 
 .card div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar {
   height: 50px;
   width: 50px;
   border-radius: 30px;
+}
+
+.noAvatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
 }
 
 .card h5 {
@@ -42,4 +73,13 @@
   line-height: 150%;
   color: #2a2b30;
   margin-left: 30px;
+}
+
+.card button {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
 }

@@ -1,34 +1,15 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
+
 import styles from "../styles/Home.module.css";
 import Card from "../components/card";
 import { getFormations } from "../actions/Formations";
-import { connect } from "react-redux";
+import WithPrivateRoute from "../components/privatRoute";
 
 function Home(props) {
-  const { posts } = props.formations;
-  // const [posts, setPosts] = useState([
-  //   {
-  //     key: 1,
-  //     title: "Devenez UX Designer",
-  //     description: `Le parcours UX Design vous permettra d’acquérir des connaissances et
-  //         des outils nécessaires pour comprendre les différents principes de la
-  //         conception de l'expérience utilisateur, d'effectuer une bonne étude
-  //         UX, d'utiliser les différents types de processus afin de
-  //         conceptualiser un produit final dans une optique centrée utilisateur.`,
-  //     image: "/cardImage.png",
-  //   },
-  //   {
-  //     key: 1,
-  //     title: "Devenez UX Designer",
-  //     description: `Le parcours UX Design vous permettra d’acquérir des connaissances et
-  //         des outils nécessaires pour comprendre les différents principes de la
-  //         conception de l'expérience utilisateur, d'effectuer une bonne étude
-  //         UX, d'utiliser les différents types de processus afin de
-  //         conceptualiser un produit final dans une optique centrée utilisateur.`,
-  //     image: "/cardImage.png",
-  //   },
-  // ]);
+  // const { posts } = props.formations;
+  const [posts, setPosts] = useState([]);
 
   //local variables
   let fillers = [];
@@ -44,9 +25,9 @@ function Home(props) {
     setElement(elements);
     if (process.browser) {
       let id = localStorage.getItem("userId");
-      props.getFormations(id);
+      props.getFormations(id).then((data) => setPosts(data));
     }
-  }, []);
+  }, [posts]);
 
   const fill = () => {
     for (let i = 0; i <= elements; i++) {
@@ -94,4 +75,6 @@ const mapDispatchToProps = {
   getFormations,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default WithPrivateRoute(
+  connect(mapStateToProps, mapDispatchToProps)(Home)
+);
