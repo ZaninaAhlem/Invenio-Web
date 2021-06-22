@@ -58,15 +58,6 @@ export const postImage = (imageData) => async (dispatch) => {
   }
 };
 
-export const getImage = (id) => async (dispatch) => {
-  try {
-    const { data } = await api.getImage(id);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getInscrits = () => async (dispatch) => {
   try {
     const { data } = await api.getInscrits();

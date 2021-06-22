@@ -11,6 +11,7 @@ import {
   updateProfile,
   logout,
   deleteAccount,
+  uploadAvatar,
 } from "../actions/auth";
 
 function Profile(props) {
@@ -25,7 +26,7 @@ function Profile(props) {
   });
 
   useEffect(() => {
-    props.getProfile().then((data) =>
+    props.getProfile().then((data) => {
       setCenter({
         name: data.name,
         email: data.email,
@@ -34,8 +35,12 @@ function Profile(props) {
         pays: data.pays,
         adresse: data.adresse,
         avatar: data.avatar,
-      })
-    );
+        bio: data.bio,
+        specialities: data.specialities,
+        type: data.type,
+        founded: data.founded,
+      });
+    });
   }, []);
 
   const onChange = (field, value) => {
@@ -75,8 +80,54 @@ function Profile(props) {
           </button>
         </section>
         <section className={styles.formContainer}>
-          <div className={styles.avatar}>{center.image && <Image />}</div>
           <form className={styles.form}>
+            <span>Informations personnelles</span>
+            <label>Bio</label>
+            <textarea
+              name="bio"
+              type="text"
+              required
+              value={center.bio}
+              placeholder="Bio"
+              onChange={(e) => onChange(e.target.name, e.target.value)}
+            />
+            <label>Spécialitées</label>
+            <input
+              name="specialities"
+              type="text"
+              required
+              value={center.specialities}
+              placeholder="Spécialitées"
+              onChange={(e) => onChange(e.target.name, e.target.value)}
+            />
+            <label>Type</label>
+            <input
+              name="type"
+              type="text"
+              required
+              value={center.type}
+              placeholder="Type"
+              onChange={(e) => onChange(e.target.name, e.target.value)}
+            />
+            <label>Fondée</label>
+            <input
+              name="founded"
+              type="text"
+              required
+              value={center.founded}
+              placeholder="Fondée"
+              onChange={(e) => onChange(e.target.name, e.target.value)}
+            />
+            <label>Adresse</label>
+            <input
+              name="adresse"
+              type="text"
+              required
+              value={center.adresse}
+              placeholder="Adresse"
+              onChange={(e) => onChange(e.target.name, e.target.value)}
+            />
+            <span>Sécurité</span>
             <label>nom</label>
             <input
               name="name"
@@ -136,6 +187,7 @@ const mapDispatchToProps = {
   updateProfile,
   deleteAccount,
   logout,
+  uploadAvatar,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -20,11 +20,9 @@ function Messages(props) {
   const [newMessage, setNewMessage] = useState("");
 
   const id = "60b3bc8c8566ad20c4ae7aa7";
-  const roomId = "60857251426d071bc43d97fe";
-  const userId = "6088637ff18a642e34120691";
 
   const sendMessageHandler = () => {
-    props.sendMessage(id, newMessage, roomId);
+    props.sendMessage(id, newMessage, selectedChat);
     setMessages([...messages, { sender: "ADEA", msg: newMessage }]);
     setNewMessage("");
   };
@@ -33,10 +31,12 @@ function Messages(props) {
     if (!isVisible) {
       setIsVisible(true);
       setSelectedChat(selected._id);
-      props.joinRoom(userId, id);
+      props.joinRoom(selected._id, id);
+      props.getMessages(selected._id).then((data) => setMessages(data));
     } else if (isVisible && selected._id !== selectedChat) {
       setSelectedChat(selected._id);
-      props.joinRoom(userId, id);
+      props.joinRoom(selected._id, id);
+      props.getMessages(selected._id).then((data) => setMessages(data));
     } else {
       setIsVisible(false);
       setSelectedChat("");
@@ -46,9 +46,10 @@ function Messages(props) {
   const getAvatar = (room) => {};
 
   useEffect(() => {
-    props.getMessages("name").then((data) => setMessages(data));
+    if (selectedChat)
+      props.getMessages(selectedChat).then((data) => setMessages(data));
     props.getRooms(id).then((data) => setRooms(data));
-  }, []);
+  }, [messages]);
 
   return (
     <>
@@ -79,7 +80,12 @@ function Messages(props) {
         </div>
       )}
       <div className={styles.messageBullets}>
-        <button className={styles.addMessage}>
+        <button
+          className={styles.addMessage}
+          onClick={() => {
+            // props.joinRoom(selectedChat, id);
+          }}
+        >
           <Image src="/edit.svg" height="20px" width="20px" />
         </button>
         {rooms &&

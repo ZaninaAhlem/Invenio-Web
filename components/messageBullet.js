@@ -10,7 +10,7 @@ export default function MessageBullet({ room, onSelect }) {
   const [userAvatar, setUserAvatar] = useState("");
 
   useEffect(() => {
-    dispatch(getUser(room.user)).then((data) => setUserAvatar(data.avatar));
+    dispatch(getUser(room.userId)).then((data) => setUserAvatar(data.avatar));
   });
 
   return (

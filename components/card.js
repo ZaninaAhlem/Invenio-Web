@@ -5,15 +5,10 @@ import Link from "next/link";
 import { connect } from "react-redux";
 
 import styles from "../styles/Card.module.css";
-import { deleteFormation, getImage } from "../actions/Formations";
+import { deleteFormation } from "../actions/Formations";
 
 function Card(props) {
   const [isVisible, setIsVisible] = useState(false);
-  // const [image, setImage] = useState("");
-
-  useEffect(() => {
-    props.getImage(props.post.image);
-  }, []);
 
   return (
     <div className={styles.card}>
@@ -70,7 +65,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   deleteFormation,
-  getImage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

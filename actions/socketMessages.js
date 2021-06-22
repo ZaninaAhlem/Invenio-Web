@@ -3,12 +3,13 @@ import * as api from "../api/index";
 import io from "socket.io-client";
 let socket = io("http://localhost:4000");
 
-export const joinRoom = (userId, centerId) => async (dispatch) => {
-  socket.emit("join", { userId, centerId }, (error) => {
+export const joinRoom = (roomId, centerId) => async (dispatch) => {
+  let userId = "";
+  socket.emit("join", { roomId, userId, centerId }, (error) => {
     if (error) {
       console.log(error);
     }
-    console.log("joined to ", centerId);
+    console.log("joined to ", roomId);
   });
 };
 
@@ -21,9 +22,9 @@ export const sendMessage = (id, message, room) => async (dispatch) => {
   });
 };
 
-export const getMessages = (room) => async (dispatch) => {
+export const getMessages = (id) => async (dispatch) => {
   try {
-    const { data } = await api.getMessages(room);
+    const { data } = await api.getMessages(id);
 
     dispatch({ type: "GET-MESSAGES", payload: data });
     return data;

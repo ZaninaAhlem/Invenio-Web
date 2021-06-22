@@ -35,6 +35,8 @@ export const deleteAccount = () =>
     },
   });
 
+export const uploadAvatar = (imageData) => API.post("upload/avatar", imageData);
+
 //formations
 export const getFormations = (id) => API.get(`/center/formations/${id}`);
 export const getFormation = (id) => API.get(`/formation/${id}`);
@@ -77,7 +79,7 @@ export const responseInscDemands = (id, data) =>
   });
 
 //messages
-export const getMessages = (room) => API.get(`/centers/${room}`);
+export const getMessages = (id) => API.get(`/messages/${id}`);
 export const getRooms = (id) => API.get(`/rooms/${id}`);
 export const getUser = (id) => API.get(`/room/users/${id}`);
 

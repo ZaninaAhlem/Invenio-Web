@@ -79,3 +79,12 @@ export const getUser = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const uploadAvatar = (imageData) => async (dispatch) => {
+  try {
+    const { data } = await api.uploadAvatar(imageData);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

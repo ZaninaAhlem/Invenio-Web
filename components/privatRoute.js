@@ -30,10 +30,8 @@ const WithPrivateRoute = (WrappedComponent) => {
 
   hocComponent.getInitialProps = async ({ res, req }) => {
     const isLoggedIn = checkUserAuthentication(req);
-    console.log(isLoggedIn);
 
     if (!isLoggedIn) {
-      console.log("res");
       // if (res) {
       //   res?.writeHead(302, {
       //     Location: login,
