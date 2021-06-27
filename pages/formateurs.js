@@ -38,25 +38,28 @@ function Formateurs(props) {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.card}>
-          <input
-            value={formateur.name}
-            placeholder="Ajouter un formateur"
-            onChange={(e) =>
-              setFormateur({ ...formateur, name: e.target.value })
-            }
-          />
-          <button
-            onClick={() => {
-              props.addFormateur(formateur);
-              setFormateur({
-                name: "",
-                avatar: "",
-              });
-            }}
-          >
-            <Image src="/check.svg" width="20px" height="20px" />
-          </button>
+        <div>
+          <form className={styles.card}>
+            <input
+              value={formateur.name}
+              placeholder="Ajouter un formateur"
+              onChange={(e) =>
+                setFormateur({ ...formateur, name: e.target.value })
+              }
+            />
+            <button
+              type="submit"
+              onClick={() => {
+                props.addFormateur(formateur);
+                setFormateur({
+                  name: "",
+                  avatar: "",
+                });
+              }}
+            >
+              <Image src="/check.svg" width="20px" height="20px" />
+            </button>
+          </form>
         </div>
         {formateurs &&
           formateurs.map((formateur, index) => {

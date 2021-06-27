@@ -3,7 +3,8 @@ import Router from "next/router";
 import cookie from "js-cookie";
 import { parse } from "cookie";
 
-const login = "/";
+const login = "/login";
+
 const checkUserAuthentication = (req) => {
   const serverCookie = req?.headers.cookie;
   let jwt;
@@ -14,11 +15,13 @@ const checkUserAuthentication = (req) => {
   }
   return !!jwt;
 };
+
 const WithPrivateRoute = (WrappedComponent) => {
   const hocComponent = ({ ...props }) => <WrappedComponent {...props} />;
   hocComponent.getInitialProps = async ({ res, req }) => {
     const isLoggedIn = checkUserAuthentication(req);
     if (!isLoggedIn) {
+      console.log("not logged");
       if (res) {
         res?.writeHead(302, {
           Location: login,

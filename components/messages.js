@@ -86,7 +86,7 @@ function Messages(props) {
             // props.joinRoom(selectedChat, id);
           }}
         >
-          <Image src="/edit.svg" height="20px" width="20px" />
+          <Image src="/message-square.svg" height="20px" width="20px" />
         </button>
         {rooms &&
           rooms.map((room, index) => {

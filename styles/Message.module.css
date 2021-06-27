@@ -15,12 +15,11 @@
 }
 
 .addMessage {
-  width: 40px;
-  height: 40px;
-  background: #006666;
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
   box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  margin-top: 5px;
+  border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;

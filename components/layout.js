@@ -6,6 +6,8 @@ import styles from "../styles/Layout.module.css";
 
 export default function Layout({ children }) {
   const [selected, setSelected] = useState("formations");
+  const [dropDown, setDropDown] = useState(false);
+
   useEffect(() => {
     if (process.browser) {
       const url = window.location.href;
@@ -33,10 +35,7 @@ export default function Layout({ children }) {
               <div className={styles.rightSection}>
                 <a
                   className={styles.profile}
-                  onClick={() => {
-                    Router.push("/profile");
-                    setSelected("");
-                  }}
+                  onClick={() => setDropDown(!dropDown)}
                 >
                   <p className={styles.user}>ADEA</p>
                   <Image
@@ -47,6 +46,28 @@ export default function Layout({ children }) {
                     objectFit="cover"
                   />
                 </a>
+                {dropDown && (
+                  <div className={styles.dropDown}>
+                    <ul>
+                      <li
+                        onClick={() => {
+                          Router.push("/profile");
+                          setSelected("");
+                        }}
+                      >
+                        Profil
+                      </li>
+                      <li
+                        onClick={() => {
+                          Router.push("/profile");
+                          setSelected("");
+                        }}
+                      >
+                        Log out
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </section>
 
