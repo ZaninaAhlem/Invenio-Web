@@ -15,6 +15,7 @@ import {
 } from "../actions/auth";
 
 function Profile(props) {
+  const [tab, setTab] = useState("profile");
   const [center, setCenter] = useState({
     name: "",
     email: "",
@@ -27,19 +28,20 @@ function Profile(props) {
 
   useEffect(() => {
     props.getProfile().then((data) => {
-      setCenter({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        phoneNumber: data.phoneNumber,
-        pays: data.pays,
-        adresse: data.adresse,
-        avatar: data.avatar,
-        bio: data.bio,
-        specialities: data.specialities,
-        type: data.type,
-        founded: data.founded,
-      });
+      data &&
+        setCenter({
+          name: data.name || "",
+          email: data.email || "",
+          password: data.password || "",
+          phoneNumber: data.phoneNumber || "",
+          pays: data.pays || "",
+          adresse: data.adresse || "",
+          avatar: data.avatar || "",
+          bio: data.bio || "",
+          specialities: data.specialities || "",
+          type: data.type || "",
+          founded: data.founded || "",
+        });
     });
   }, []);
 
@@ -58,16 +60,27 @@ function Profile(props) {
         <section className={styles.leftSide}>
           <div>{center.image && <Image />}</div>
           <h2>{center.name}</h2>
-          <button>
-            <Image src="/edit-2.svg" width="20px" height="20px" />
+          <button
+            className={tab === "profile" && styles.selected}
+            onClick={() => setTab("profile")}
+          >
+            <Image src="/user.svg" width="20px" height="20px" />
             <span>Editer Profil</span>
           </button>
+          <button
+            className={tab === "settings" && styles.selected}
+            onClick={() => setTab("settings")}
+          >
+            <Image src="/settings.svg" width="20px" height="20px" />
+            <span>Paramètres</span>
+          </button>
+          <hr className={styles.separator} />
           <button
             onClick={() => {
               props.logout().then(() => Router.push("/login"));
             }}
           >
-            <Image src="/log-out.svg" width="20px" height="20px" />
+            <Image src="/power.svg" width="20px" height="20px" />
             <span>Logout</span>
           </button>
           <button
@@ -81,88 +94,99 @@ function Profile(props) {
         </section>
         <section className={styles.formContainer}>
           <form className={styles.form}>
-            <span>Informations personnelles</span>
-            <label>Bio</label>
-            <textarea
-              name="bio"
-              type="text"
-              required
-              value={center.bio}
-              placeholder="Bio"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>Spécialitées</label>
-            <input
-              name="specialities"
-              type="text"
-              required
-              value={center.specialities}
-              placeholder="Spécialitées"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>Type</label>
-            <input
-              name="type"
-              type="text"
-              required
-              value={center.type}
-              placeholder="Type"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>Fondée</label>
-            <input
-              name="founded"
-              type="text"
-              required
-              value={center.founded}
-              placeholder="Fondée"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>Adresse</label>
-            <input
-              name="adresse"
-              type="text"
-              required
-              value={center.adresse}
-              placeholder="Adresse"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <span>Sécurité</span>
-            <label>nom</label>
-            <input
-              name="name"
-              type="text"
-              required
-              value={center.name}
-              placeholder="Name"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>email</label>
-            <input
-              name="email"
-              type="text"
-              required
-              value={center.email}
-              placeholder="Email"
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>password</label>
-            <input
-              name="password"
-              type="password"
-              value={center.password}
-              required
-              onChange={(e) => onChange(e.target.name, e.target.value)}
-            />
-            <label>phone number</label>
-            <input
-              name="phoneNumber"
-              value={center.phoneNumber}
-              required
-              onChange={(e) =>
-                onChange(e.target.name, parseInt(e.target.value, 10))
-              }
-            />
+            {tab === "profile" && (
+              <>
+                <h3>Informations personnelles</h3>
+                <br />
+                <label>Bio</label>
+                <textarea
+                  name="bio"
+                  type="text"
+                  required
+                  value={center.bio}
+                  placeholder="Bio"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>Spécialitées</label>
+                <input
+                  name="specialities"
+                  type="text"
+                  required
+                  value={center.specialities}
+                  placeholder="Spécialitées"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>Type</label>
+                <input
+                  name="type"
+                  type="text"
+                  required
+                  value={center.type}
+                  placeholder="Type"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>Fondée</label>
+                <input
+                  name="founded"
+                  type="text"
+                  required
+                  value={center.founded}
+                  placeholder="Fondée"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>Adresse</label>
+                <input
+                  name="adresse"
+                  type="text"
+                  required
+                  value={center.adresse}
+                  placeholder="Adresse"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+              </>
+            )}
+
+            {tab === "settings" && (
+              <>
+                <h3>Sécurité</h3>
+                <br />
+                <label>nom</label>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  value={center.name}
+                  placeholder="Name"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>email</label>
+                <input
+                  name="email"
+                  type="text"
+                  required
+                  value={center.email}
+                  placeholder="Email"
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>password</label>
+                <input
+                  name="password"
+                  type="password"
+                  value={center.password}
+                  required
+                  onChange={(e) => onChange(e.target.name, e.target.value)}
+                />
+                <label>phone number</label>
+                <input
+                  name="phoneNumber"
+                  value={center.phoneNumber}
+                  required
+                  onChange={(e) =>
+                    onChange(e.target.name, parseInt(e.target.value, 10))
+                  }
+                />
+              </>
+            )}
             <button
               onClick={(e) => {
                 e.preventDefault();

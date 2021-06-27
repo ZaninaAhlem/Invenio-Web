@@ -31,6 +31,37 @@
 .headerTop .rightSection {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.dropDown {
+  position: absolute;
+  z-index: 99999;
+  width: 170px;
+  background-color: white;
+  top: 60px;
+  right: 0;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0px 10px 75px rgb(38 44 72 / 15%);
+}
+
+.dropDown ul {
+  display: grid;
+  gap: 5px;
+}
+
+.dropDown ul li {
+  color: black;
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropDown ul li:hover {
+  background-color: #f0f0f5;
 }
 
 .appName {

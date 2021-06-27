@@ -8,12 +8,12 @@
   background: #ffffff;
   border: 1px solid #ced5de;
   box-sizing: border-box;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 15px;
   height: 50px;
   width: 500px;
   max-width: 45%;
-  margin: 15px 0 25px;
+  margin: 0 0 15px 0;
 
   font-family: "Sofia Pro";
   font-style: normal;
