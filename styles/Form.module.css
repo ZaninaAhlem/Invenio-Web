@@ -110,10 +110,9 @@
 
 .form label {
   display: block;
-  font-family: "Sofia Pro";
+  font-family: "poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
   line-height: 150%;
   color: #2a2b30;
   margin-bottom: 10px;
@@ -131,10 +130,9 @@
   border-radius: 8px;
   height: auto;
   width: 100%;
-  font-family: "Sofia Pro";
+  font-family: "poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
   line-height: 150%;
   padding: 16px;
   color: #000000;
@@ -193,10 +191,9 @@
 .inscriptionForm label,
 .formCreated label {
   display: block;
-  font-family: "Sofia Pro";
+  font-family: "poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
   line-height: 150%;
   color: #2a2b30;
   margin-bottom: 10px;

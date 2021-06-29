@@ -3,12 +3,17 @@ import Image from "next/image";
 import Router from "next/router";
 import Messages from "./messages";
 import styles from "../styles/Layout.module.css";
+import { useDispatch } from "react-redux";
+import { logout, getProfile } from "../actions/auth";
 
 export default function Layout({ children }) {
   const [selected, setSelected] = useState("formations");
   const [dropDown, setDropDown] = useState(false);
+  const [center, setCenter] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getProfile()).then((data) => setCenter(data));
     if (process.browser) {
       const url = window.location.href;
       const currentPage = url.split("/").pop();
@@ -29,7 +34,7 @@ export default function Layout({ children }) {
                 <Image src="/logo.svg" alt="logo" width="24px" height="30px" />
                 <h1 className={styles.appName}>Invenio</h1>
                 <hr className={styles.line} />
-                <p className={styles.userName}>ADEA</p>
+                {center && <p className={styles.userName}>{center.name}</p>}
               </div>
 
               <div className={styles.rightSection}>
@@ -37,20 +42,23 @@ export default function Layout({ children }) {
                   className={styles.profile}
                   onClick={() => setDropDown(!dropDown)}
                 >
-                  <p className={styles.user}>ADEA</p>
-                  <Image
-                    src="/profileImage.png"
-                    alt="profile image"
-                    width="30"
-                    height="30"
-                    objectFit="cover"
-                  />
+                  {center && (
+                    <>
+                      <p className={styles.user}>{center.name}</p>
+                      <img
+                        src={`http://localhost:3080/upload/${center.avatar}.png`}
+                        width="40"
+                        height="40"
+                      />
+                    </>
+                  )}
                 </a>
                 {dropDown && (
                   <div className={styles.dropDown}>
                     <ul>
                       <li
                         onClick={() => {
+                          setDropDown(false);
                           Router.push("/profile");
                           setSelected("");
                         }}
@@ -59,8 +67,10 @@ export default function Layout({ children }) {
                       </li>
                       <li
                         onClick={() => {
-                          Router.push("/profile");
+                          localStorage.removeItem("userToken");
                           setSelected("");
+                          setDropDown(false);
+                          Router.push("/login");
                         }}
                       >
                         Log out

@@ -106,6 +106,14 @@ function Form(props) {
     }
   }, [selectedImage]);
 
+  useEffect(() => {
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("file", selectedImage);
+      props.postImage(formData).then((data) => onChange("image", data));
+    }
+  }, [selectedImage]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -122,14 +130,6 @@ function Form(props) {
                   className={styles.imageHolder}
                   method="post"
                   encType="multipart/form-data"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const formData = new FormData();
-                    formData.append("file", selectedImage);
-                    props
-                      .postImage(formData)
-                      .then((data) => onChange("image", data));
-                  }}
                 >
                   {!selectedImage && (
                     <div className={styles.descriptionContainer}>

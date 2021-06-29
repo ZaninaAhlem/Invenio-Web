@@ -145,7 +145,6 @@ const InputContainer = styled.div`
   input[type="number"],
   input[type="email"] {
     border: 0;
-    font-size: 14px;
     width: 100%;
     padding: 5px 0;
   }

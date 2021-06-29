@@ -25,17 +25,15 @@
 }
 
 /* to all div under leftSide */
-.leftSide > div {
+/* .leftSide > div {
   height: 80px;
   width: 80px;
   border-radius: 40px;
-  background-color: #e5e5e5;
-}
+} */
 
 .leftSide span {
   margin-left: 10px;
-  font-family: "Sofia Pro";
-  font-size: 16px;
+  font-family: "poppins";
 }
 
 /* to all div under leftSide except the first one */
@@ -61,6 +59,26 @@
 
 .leftSide button:hover {
   background-color: #f0f0f5;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.fileBrowser {
+  width: 80px;
+  height: 80px;
+  z-index: 9;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.descriptionContainer {
+  background-color: #e5e5e5;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 
 .selected {
@@ -97,10 +115,9 @@
 }
 
 .main label {
-  font-family: "Sofia Pro";
+  font-family: "poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
   line-height: 150%;
   color: #2a2b30;
   margin-bottom: 10px;
@@ -110,7 +127,7 @@
   height: auto;
 }
 
-.main input,
+.formContainer input,
 .main textarea {
   background: #ffffff;
   border: 1px solid #ced5de;
@@ -119,10 +136,9 @@
   border-radius: 8px;
   resize: none;
   width: 500px;
-  font-family: "Sofia Pro";
+  font-family: "poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
   line-height: 150%;
   padding: 16px;
   color: #000000;

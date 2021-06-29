@@ -16,6 +16,8 @@ import {
 
 function Profile(props) {
   const [tab, setTab] = useState("profile");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [image, setImage] = useState();
   const [center, setCenter] = useState({
     name: "",
     email: "",
@@ -42,8 +44,20 @@ function Profile(props) {
           type: data.type || "",
           founded: data.founded || "",
         });
+      setImage(data.avatar);
     });
   }, []);
+
+  useEffect(() => {
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("file", selectedImage);
+      props.uploadAvatar(formData).then((data) => {
+        props.updateProfile({ ...center, avatar: data });
+        setImage(data);
+      });
+    }
+  }, [selectedImage]);
 
   const onChange = (field, value) => {
     setCenter({ ...center, [field]: value });
@@ -58,7 +72,47 @@ function Profile(props) {
 
       <main className={styles.main}>
         <section className={styles.leftSide}>
-          <div>{center.image && <Image />}</div>
+          <div>
+            <form
+              className={styles.imageHolder}
+              method="post"
+              encType="multipart/form-data"
+            >
+              {center.avatar ? (
+                <>
+                  <img
+                    src={`http://localhost:3080/upload/${image}.png`}
+                    height="80"
+                    width="80"
+                    className={styles.avatar}
+                  />
+
+                  <input
+                    className={styles.fileBrowser}
+                    type="file"
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedImage(e.target.files[0]);
+                    }}
+                    style={{ position: "absolute", top: 40 }}
+                  />
+                </>
+              ) : (
+                !selectedImage && (
+                  <div className={styles.descriptionContainer}>
+                    <input
+                      className={styles.fileBrowser}
+                      type="file"
+                      name="file"
+                      onChange={(e) => {
+                        setSelectedImage(e.target.files[0]);
+                      }}
+                    />
+                  </div>
+                )
+              )}
+            </form>
+          </div>
           <h2>{center.name}</h2>
           <button
             className={tab === "profile" && styles.selected}
@@ -77,7 +131,8 @@ function Profile(props) {
           <hr className={styles.separator} />
           <button
             onClick={() => {
-              props.logout().then(() => Router.push("/login"));
+              localStorage.removeItem("userToken");
+              Router.push("/login");
             }}
           >
             <Image src="/power.svg" width="20px" height="20px" />

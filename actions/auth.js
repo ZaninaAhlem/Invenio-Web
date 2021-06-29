@@ -26,11 +26,11 @@ export const signUp = (formData) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  console.log("from actions");
   try {
     const { data } = await api.logout();
+    console.log(data);
 
-    dispatch({ type: "LOGOUT", payload: data });
+    // dispatch({ type: "LOGOUT", payload: data });
     console.log("logged out");
   } catch (error) {
     console.log(error);

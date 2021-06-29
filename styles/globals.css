@@ -6,6 +6,7 @@ body {
   margin: 0;
   background-color: #f8f8fa;
   font-family: Poppins, sans-serif;
+  font-size: 13px;
 }
 
 a {
@@ -419,6 +420,7 @@ progress {
 
 textarea {
   overflow: auto;
+  font-size: 13px;
 }
 
 /**

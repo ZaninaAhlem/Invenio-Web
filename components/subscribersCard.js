@@ -17,6 +17,7 @@ function SubscribersCard(props) {
   const [inscDemands, setInscDemands] = useState([]);
   const [formLabels, setFormLabels] = useState([]);
   const [subscribers, setSubscribers] = useState(item.subscribers);
+  const [selectedDemand, setSelectedDemand] = useState();
 
   useEffect(() => {
     const getData = () => {
@@ -38,126 +39,138 @@ function SubscribersCard(props) {
   };
 
   return (
-    <div className={styles.card}>
-      <div
-        className={styles.shownInfo}
-        onClick={() => {
-          setExpended(!expended);
-        }}
-      >
-        <div>
-          <h3>{item.title}</h3>
-          {inscDemands.length > 0 && !expended && (
-            <span>{inscDemands.length}</span>
-          )}
+    <>
+      <div className={styles.card}>
+        <div
+          className={styles.shownInfo}
+          onClick={() => {
+            setExpended(!expended);
+          }}
+        >
+          <div>
+            <h3>{item.title}</h3>
+            {inscDemands.length > 0 && !expended && (
+              <span className={styles.badge}>{inscDemands.length}</span>
+            )}
+          </div>
+          <div>
+            {!expended && <span>{subscribers.length} inscrits</span>}
+            <button className={styles.expand}>
+              <img src="./chevron-down.svg" />
+            </button>
+          </div>
         </div>
-        {!expended && <span>{subscribers.length} subscribers</span>}
-      </div>
-      {expended && (
-        <div className={styles.hidenInfo}>
-          <p>Les demandes d'inscription:</p>
-          {inscDemands.length > 0 &&
-            inscDemands.map((inscDemand, index) => {
-              return (
-                <section key={index} className={styles.demandCard}>
-                  <div>
-                    <img
-                      src={`http://localhost:3080/upload/${inscDemand.avatar}.png`}
-                      height="40"
-                      width="40"
-                    />
-                    <h5>{inscDemand.name}</h5>
-                    <button
-                      onClick={(e) => {
-                        setShowResponses(inscDemand.name);
-                      }}
-                    >
-                      <img src="/eye.svg" width="20px" height="20px" />
-                    </button>
-                    {showResponses === inscDemand.name && (
-                      <section className={styles.form}>
-                        <button onClick={() => setShowResponses("#")}>
-                          <img src="/x.svg" height="20" width="20" />
-                        </button>
-                        <div>
-                          <img
-                            src={`http://localhost:3080/upload/${inscDemand.avatar}.png`}
-                            height="40"
-                            width="40"
-                          />
-                          <h5 className={styles.name}>{inscDemand.name}</h5>
-                        </div>
-                        <section>
-                          <div>
-                            {formLabels.map((label, index) => {
-                              return (
-                                <span key={index} className={styles.label}>
-                                  {label}
-                                </span>
-                              );
-                            })}
-                          </div>
-                          <div>
-                            {inscDemand.response.map((res, index) => {
-                              return (
-                                <span key={index} className={styles.answer}>
-                                  {res}
-                                </span>
-                              );
-                            })}
-                          </div>
-                        </section>
-                      </section>
-                    )}
-                  </div>
-                  <div>
-                    <button
-                      className={styles.acceptBtn}
-                      onClick={(e) =>
-                        clickHandler(e, { id: inscDemand._id, accepted: true })
-                      }
-                    >
-                      <img src="/check.svg" width="20px" height="20px" />
-                    </button>
-                    <button
-                      className={styles.refuseBtn}
-                      onClick={(e) =>
-                        clickHandler(e, { id: inscDemand._id, accepted: false })
-                      }
-                    >
-                      <img src="/x.svg" width="20px" height="20px" />
-                    </button>
-                  </div>
-                </section>
-              );
-            })}
-          <p>Les inscrits:</p>
-          {subscribers.length > 0 ? (
-            subscribers.map((subscriber, index) => {
+        {expended && (
+          <div className={styles.hidenInfo}>
+            <h3>Les demandes d'inscription:</h3>
+            {inscDemands.length > 0 &&
+              inscDemands.map((inscDemand, index) => {
+                return (
+                  <section key={index} className={styles.demandCard}>
+                    <div>
+                      <img
+                        src={`http://localhost:3080/upload/${inscDemand.avatar}.png`}
+                        height="30"
+                        width="30"
+                      />
+                      <h5>{inscDemand.name}</h5>
+                    </div>
+                    <div>
+                      <button
+                        className={styles.actionBtn}
+                        onClick={(e) => {
+                          setShowResponses(inscDemand.name);
+                          setSelectedDemand(inscDemand);
+                        }}
+                      >
+                        <img src="/eye.svg" width="20px" height="20px" />
+                      </button>
+                      <button
+                        className={styles.actionBtn}
+                        onClick={(e) =>
+                          clickHandler(e, {
+                            id: inscDemand._id,
+                            accepted: true,
+                          })
+                        }
+                      >
+                        <img src="/check.svg" width="20px" height="20px" />
+                      </button>
+                      <button
+                        className={styles.actionBtn}
+                        onClick={(e) =>
+                          clickHandler(e, {
+                            id: inscDemand._id,
+                            accepted: false,
+                          })
+                        }
+                      >
+                        <img src="/x.svg" width="20px" height="20px" />
+                      </button>
+                    </div>
+                  </section>
+                );
+              })}
+            <hr className={styles.separator} />
+            <h3>Les inscrits:</h3>
+            {subscribers.map((subscriber, index) => {
               return (
                 <div key={index} className={styles.subscriber}>
                   <img
                     src={`http://localhost:3080/upload/${subscriber.avatar}.png`}
-                    height="40"
-                    width="40"
+                    height="30"
+                    width="30"
                   />
                   <h5>{subscriber.name}</h5>
                 </div>
               );
-            })
-          ) : (
-            <>
-              <h5>user 1</h5>
-              <h5>user 2</h5>
-              <h5>user 3</h5>
-              <h5>user 4</h5>
-              <h5>user 5</h5>
-              <h5>user 6</h5>
-            </>
-          )}
+            })}
+          </div>
+        )}
+      </div>
+
+      {selectedDemand && (
+        <div className={styles.modal}>
+          <div className={styles.overlay}></div>
+          <div className={styles.mainContainer}>
+            <button
+              className={styles.close}
+              onClick={() => setSelectedDemand(null)}
+            >
+              <img src="/close.svg" height="20" width="20" />
+            </button>
+            <section className={styles.form}>
+              <img
+                src={`http://localhost:3080/upload/${selectedDemand.avatar}.png`}
+                height="40"
+                width="40"
+              />
+              <h5 className={styles.name}>{selectedDemand.name}</h5>
+            </section>
+            <div className={styles.row}>
+              <div className={styles.subRow}>
+                {formLabels.map((label, index) => {
+                  return (
+                    <span key={index} className={styles.label}>
+                      {label}
+                    </span>
+                  );
+                })}
+              </div>
+              <div className={styles.subRow}>
+                {selectedDemand.response.map((res, index) => {
+                  return (
+                    <span key={index} className={styles.answer}>
+                      {res}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
