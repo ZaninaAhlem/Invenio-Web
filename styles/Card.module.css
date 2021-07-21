@@ -8,6 +8,13 @@
   transition: all 0.8s cubic-bezier(0.13, 1.12, 0.64, 1);
 }
 
+.image {
+  height: 280px;
+  width: 375px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
 .card:hover {
   box-shadow: 0px 10px 75px rgba(38, 44, 72, 0.15);
 }
@@ -40,7 +47,7 @@
 }
 
 .details {
-  padding: 10px 20px;
+  padding: 15px 20px;
 }
 
 .title {
@@ -105,7 +112,6 @@
 
 .settings button p {
   color: var(--text-primary);
-  ;
   font-weight: 600;
   margin-left: 10px;
 }

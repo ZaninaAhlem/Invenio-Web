@@ -18,7 +18,7 @@ export const signUp = (formData) => async (dispatch) => {
 
     dispatch({ type: "AUTH", payload: data });
     console.log("signed Up");
-    return data.center;
+    return data;
   } catch (error) {
     console.log(error);
     // dispatch({ type: "ADD_ERROR", payload: error.response.data.message });

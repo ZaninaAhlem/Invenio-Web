@@ -46,7 +46,7 @@ function Home(props) {
 
       <main className={styles.main}>
         <div id="cards__container" className={styles.cards__container}>
-          {posts ? (
+          {!!posts && posts.length > 0 ? (
             posts.map(function (post, index) {
               return <Card post={post} key={index} />;
             })

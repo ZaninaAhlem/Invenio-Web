@@ -13,17 +13,22 @@ export default function Layout({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProfile()).then((data) => setCenter(data));
-    if (process.browser) {
-      const url = window.location.href;
-      const currentPage = url.split("/").pop();
-      if (url === "http://localhost:3000/") {
-        setSelected("formations");
-      } else {
-        setSelected(currentPage);
-      }
+    // dispatch(getProfile()).then((data) => setCenter(data));
+    const pathName = Router.pathname;
+    const currentPage = pathName.split("/").pop();
+    if (pathName === "/") {
+      setSelected("formations");
+    } else {
+      setSelected(currentPage);
     }
-  }, []);
+    Router.events.on("routeChangeComplete", () => {
+      dispatch(getProfile()).then((data) => setCenter(data));
+      const pathname = Router.pathname;
+      if (pathname === "/login") {
+        setSelected("login");
+      }
+    });
+  }, [selected]);
   return (
     <>
       {selected !== "login" ? (
@@ -45,11 +50,20 @@ export default function Layout({ children }) {
                   {center && (
                     <>
                       <p className={styles.user}>{center.name}</p>
-                      <img
-                        src={`http://localhost:3080/upload/${center.avatar}.png`}
-                        width="40"
-                        height="40"
-                      />
+                      {center.avatar ? (
+                        <img
+                          src={`http://localhost:3080/upload/${center.avatar}.png`}
+                          width="40"
+                          height="40"
+                        />
+                      ) : (
+                        <img
+                          src="/userW.svg"
+                          width="25"
+                          height="25"
+                          style={{ opacity: 0.7 }}
+                        />
+                      )}
                     </>
                   )}
                 </a>
@@ -88,7 +102,9 @@ export default function Layout({ children }) {
                     setSelected("formations");
                     Router.push("/");
                   }}
-                  className={selected === "formations" ? styles.selected : null}
+                  className={
+                    selected === "formations" ? styles.selected : undefined
+                  }
                 >
                   <a>
                     <span>Mes formations</span>
@@ -99,7 +115,9 @@ export default function Layout({ children }) {
                     setSelected("formateurs");
                     Router.push("/formateurs");
                   }}
-                  className={selected === "formateurs" ? styles.selected : null}
+                  className={
+                    selected === "formateurs" ? styles.selected : undefined
+                  }
                 >
                   <a>
                     <span>Mes formateurs</span>
@@ -110,7 +128,9 @@ export default function Layout({ children }) {
                     setSelected("inscrits");
                     Router.push("/inscrits");
                   }}
-                  className={selected === "inscrits" ? styles.selected : null}
+                  className={
+                    selected === "inscrits" ? styles.selected : undefined
+                  }
                 >
                   <a>
                     <span>Mes inscrits</span>

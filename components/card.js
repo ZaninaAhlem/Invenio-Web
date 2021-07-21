@@ -15,8 +15,7 @@ function Card(props) {
       {props.post.image && (
         <img
           src={`http://localhost:3080/upload/${props.post.image}.png`}
-          height="280"
-          width="375"
+          className={styles.image}
         />
       )}
 
@@ -28,7 +27,7 @@ function Card(props) {
             setIsVisible(true);
           }}
         >
-          <Image src="/settings.svg" height="16" width="16" />
+          <Image src="/settingsWhite.svg" height="16" width="16" />
         </button>
         {isVisible && (
           <div className={styles.settings}>

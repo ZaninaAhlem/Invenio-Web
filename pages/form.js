@@ -22,6 +22,7 @@ function Form(props) {
   const router = useRouter();
   const date = new Date();
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageChanged, setImageChanged] = useState(false);
   const [image, setImage] = useState();
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [toUpdate, setToUpdate] = useState(false);
@@ -45,14 +46,15 @@ function Form(props) {
   useEffect(() => {
     if (router.query.formation) {
       setToUpdate(true);
-      props.getFormation(router.query.formation).then((data) =>
+      props.getFormation(router.query.formation).then((data) => {
         setFormData({
           title: data.title,
           description: data.description,
           category: data.category,
-          date: data.date,
-        })
-      );
+          date: new Date(data.date),
+          image: data.image,
+        });
+      });
     }
   }, [router.query]);
 
@@ -110,7 +112,9 @@ function Form(props) {
     if (selectedImage) {
       const formData = new FormData();
       formData.append("file", selectedImage);
-      props.postImage(formData).then((data) => onChange("image", data));
+      props.postImage(formData).then((data) => {
+        onChange("image", data);
+      });
     }
   }, [selectedImage]);
 
@@ -123,54 +127,47 @@ function Form(props) {
       <main className={styles.main}>
         <section className={styles.formContainer}>
           <h3 className={styles.title}>Information du formation</h3>
-          {!toUpdate && (
-            <div>
-              {!formData.image ? (
-                <form
-                  className={styles.imageHolder}
-                  method="post"
-                  encType="multipart/form-data"
-                >
-                  {!selectedImage && (
-                    <div className={styles.descriptionContainer}>
-                      <span className={styles.description}>
-                        Selectionner un fichier
-                        <br />
-                        <label>Format suppoté: JPG, JPEG, PNG, </label>
-                      </span>
-                      <label className={styles.button}>Parcourir</label>
-                    </div>
-                  )}
-                  <input
-                    className={styles.fileBrowser}
-                    type="file"
-                    name="file"
-                    onChange={(e) => {
-                      setSelectedImage(e.target.files[0]);
-                    }}
-                  />
-                  {!!selectedImage && (
-                    <>
-                      <div className={styles.preview}>
-                        <img src={image} alt="" className={styles.previewImg} />
-                      </div>
-                      {/* <button
-                        type="submit"
-                        value="Submit"
-                        className={styles.button}
-                      >
-                        <span>Submit</span>
-                      </button> */}
-                    </>
-                  )}
-                </form>
-              ) : (
-                <div className={styles.image}>
-                  <img src={URL.createObjectURL(selectedImage)} />
+          <div>
+            <form
+              className={styles.imageHolder}
+              method="post"
+              encType="multipart/form-data"
+            >
+              {!selectedImage && !toUpdate && (
+                <div className={styles.descriptionContainer}>
+                  <span className={styles.description}>
+                    Selectionner un fichier
+                    <br />
+                    <label>Format suppoté: JPG, JPEG, PNG, </label>
+                  </span>
+                  <label className={styles.button}>Parcourir</label>
                 </div>
               )}
-            </div>
-          )}
+              <input
+                className={styles.fileBrowser}
+                type="file"
+                name="file"
+                onChange={(e) => {
+                  setSelectedImage(e.target.files[0]);
+                }}
+              />
+              {!!selectedImage ? (
+                <div className={styles.preview}>
+                  {image && (
+                    <img src={image} alt="" className={styles.previewImg} />
+                  )}
+                </div>
+              ) : (
+                toUpdate && (
+                  <img
+                    src={`http://localhost:3080/upload/${formData.image}.png`}
+                    alt=""
+                    className={styles.previewImg}
+                  />
+                )
+              )}
+            </form>
+          </div>
           <div className={styles.form}>
             <div>
               <label htmlFor="Title">Titre</label>
@@ -202,7 +199,7 @@ function Form(props) {
                 name="Category"
                 type="text"
                 placeholder="category"
-                value={formData.title}
+                value={formData.category}
                 required
                 onChange={(e) => onChange("category", e.target.value)}
               />
@@ -211,14 +208,30 @@ function Form(props) {
             <div className={styles.datePicker}>
               <label htmlFor="Date">Date</label>
               <DatePicker
-                selected={date}
-                onChange={(date) => onChange("date", date)}
+                selected={!toUpdate ? formData.date : formData.date}
+                onChange={(date) => {
+                  onChange("date", date);
+                }}
               />
-              {!toUpdate ? (
-                !btnDisabled && <button onClick={addPost}>Ajouter</button>
-              ) : (
-                <button onClick={updatePost}>Update</button>
-              )}
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: 20,
+                  justifyContent: "center",
+                }}
+              >
+                {!toUpdate ? (
+                  !btnDisabled && (
+                    <button onClick={addPost} className={styles.button}>
+                      Ajouter
+                    </button>
+                  )
+                ) : (
+                  <button onClick={updatePost} className={styles.button}>
+                    Update
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -252,9 +265,10 @@ function Form(props) {
                 <button
                   className={styles.button}
                   onClick={() => {
-                    props
-                      .addInscriptionForm(formFieldData)
-                      .then((data) => onChange("inscriptionForm", data._id));
+                    props.addInscriptionForm(formFieldData).then((data) => {
+                      onChange("inscriptionForm", data._id);
+                      setBtnDisabled(false);
+                    });
                   }}
                 >
                   Créer Formulaire
@@ -262,7 +276,7 @@ function Form(props) {
               </section>
             ) : (
               <section className={styles.formCreated}>
-                <span>le formulaire a été créé avec succès</span>
+                <span>Le formulaire a été créé avec succès</span>
                 <Image src="/check.svg" height="24px" width="24px" />
               </section>
             )}

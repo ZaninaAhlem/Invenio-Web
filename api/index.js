@@ -38,7 +38,8 @@ export const deleteAccount = () =>
 export const uploadAvatar = (imageData) => API.post("upload/avatar", imageData);
 
 //formations
-export const getFormations = (id) => API.get(`/center/formations/${id}`);
+export const getFormations = (id) =>
+  API.get(`/center/formations/${id}?sortBy=createdAt_desc`);
 export const getFormation = (id) => API.get(`/formation/${id}`);
 export const postFormation = (formData) =>
   API.post(`/formations`, formData, {

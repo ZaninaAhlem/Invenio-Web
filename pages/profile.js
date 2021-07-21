@@ -18,6 +18,7 @@ function Profile(props) {
   const [tab, setTab] = useState("profile");
   const [selectedImage, setSelectedImage] = useState(null);
   const [image, setImage] = useState();
+  const [mdpHidden, setMdpHidden] = useState(true);
   const [center, setCenter] = useState({
     name: "",
     email: "",
@@ -97,32 +98,48 @@ function Profile(props) {
                     style={{ position: "absolute", top: 40 }}
                   />
                 </>
+              ) : !!selectedImage ? (
+                <div className={styles.preview}>
+                  <img
+                    src={`http://localhost:3080/upload/${image}.png`}
+                    alt=""
+                    height="80"
+                    width="80"
+                    className={styles.avatar}
+                  />
+                  <input
+                    className={styles.fileBrowser}
+                    type="file"
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedImage(e.target.files[0]);
+                    }}
+                  />
+                </div>
               ) : (
-                !selectedImage && (
-                  <div className={styles.descriptionContainer}>
-                    <input
-                      className={styles.fileBrowser}
-                      type="file"
-                      name="file"
-                      onChange={(e) => {
-                        setSelectedImage(e.target.files[0]);
-                      }}
-                    />
-                  </div>
-                )
+                <div className={styles.descriptionContainer}>
+                  <input
+                    className={styles.fileBrowser}
+                    type="file"
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedImage(e.target.files[0]);
+                    }}
+                  />
+                </div>
               )}
             </form>
           </div>
           <h2>{center.name}</h2>
           <button
-            className={tab === "profile" && styles.selected}
+            className={tab === "profile" ? styles.selected : undefined}
             onClick={() => setTab("profile")}
           >
             <Image src="/user.svg" width="20px" height="20px" />
             <span>Editer Profil</span>
           </button>
           <button
-            className={tab === "settings" && styles.selected}
+            className={tab === "settings" ? styles.selected : undefined}
             onClick={() => setTab("settings")}
           >
             <Image src="/settings.svg" width="20px" height="20px" />
@@ -223,14 +240,29 @@ function Profile(props) {
                   placeholder="Email"
                   onChange={(e) => onChange(e.target.name, e.target.value)}
                 />
-                <label>password</label>
-                <input
-                  name="password"
-                  type="password"
-                  value={center.password}
-                  required
-                  onChange={(e) => onChange(e.target.name, e.target.value)}
-                />
+                <div>
+                  <label>password</label>
+                  <input
+                    name="password"
+                    type={mdpHidden ? "password" : "text"}
+                    value={center.password}
+                    required
+                    onChange={(e) => onChange(e.target.name, e.target.value)}
+                  />
+                  <button
+                    className={styles.eyeBtn}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMdpHidden(!mdpHidden);
+                    }}
+                  >
+                    {mdpHidden ? (
+                      <img src="/eye-off.svg" width="20px" height="20px" />
+                    ) : (
+                      <img src="/eye.svg" width="20px" height="20px" />
+                    )}
+                  </button>
+                </div>
                 <label>phone number</label>
                 <input
                   name="phoneNumber"
@@ -243,6 +275,7 @@ function Profile(props) {
               </>
             )}
             <button
+              className={styles.editBtn}
               onClick={(e) => {
                 e.preventDefault();
                 props.updateProfile(center);

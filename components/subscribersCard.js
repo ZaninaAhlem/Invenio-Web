@@ -49,7 +49,7 @@ function SubscribersCard(props) {
         >
           <div>
             <h3>{item.title}</h3>
-            {inscDemands.length > 0 && !expended && (
+            {inscDemands && inscDemands.length > 0 && !expended && (
               <span className={styles.badge}>{inscDemands.length}</span>
             )}
           </div>
@@ -63,15 +63,15 @@ function SubscribersCard(props) {
         {expended && (
           <div className={styles.hidenInfo}>
             <h3>Les demandes d'inscription:</h3>
-            {inscDemands.length > 0 &&
+            {inscDemands &&
+              inscDemands.length > 0 &&
               inscDemands.map((inscDemand, index) => {
                 return (
                   <section key={index} className={styles.demandCard}>
                     <div>
                       <img
                         src={`http://localhost:3080/upload/${inscDemand.avatar}.png`}
-                        height="30"
-                        width="30"
+                        style={{ height: 30, width: 30, borderRadius: 30 }}
                       />
                       <h5>{inscDemand.name}</h5>
                     </div>
@@ -118,8 +118,7 @@ function SubscribersCard(props) {
                 <div key={index} className={styles.subscriber}>
                   <img
                     src={`http://localhost:3080/upload/${subscriber.avatar}.png`}
-                    height="30"
-                    width="30"
+                    style={{ height: 30, width: 30, borderRadius: 30 }}
                   />
                   <h5>{subscriber.name}</h5>
                 </div>
@@ -142,8 +141,7 @@ function SubscribersCard(props) {
             <section className={styles.form}>
               <img
                 src={`http://localhost:3080/upload/${selectedDemand.avatar}.png`}
-                height="40"
-                width="40"
+                style={{ height: 40, width: 40, borderRadius: 20 }}
               />
               <h5 className={styles.name}>{selectedDemand.name}</h5>
             </section>

@@ -10,7 +10,7 @@ export default function FormField({ changeHandler }) {
       <input
         placeholder="Label"
         onChange={(e) => {
-          setField({ ...field, label: e.target.value });
+          setField(e.target.value);
         }}
         onBlur={() => changeHandler(field)}
       />

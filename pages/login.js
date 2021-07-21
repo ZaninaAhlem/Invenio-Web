@@ -8,22 +8,39 @@ import { signIn, signUp } from "../actions/auth";
 
 function Login(props) {
   const [form, setForm] = useState({
-    email: "adea@exp.com",
-    password: "adea12345",
+    email: "",
+    password: "",
+  });
+  const [signUpForm, setSignUpForm] = useState({
+    name: "",
+    email: "",
+    password: "",
   });
   const [tab, setTab] = useState(1);
 
   const signIn = () => props.signIn(form);
+  const signUp = () => props.signUp(signUpForm);
 
   const onclick = (e) => {
     e.preventDefault();
-    signIn().then((data) => {
-      if (data.token) Router.push("/");
-    });
+    if (tab === 1) {
+      signIn().then((data) => {
+        if (data.token) Router.push("/");
+      });
+    } else {
+      signUp().then((data) => {
+        console.log(data);
+        if (data) Router.push("/");
+      });
+    }
   };
 
   const changeHandler = (field, value) => {
     setForm({ ...form, [field]: value });
+  };
+
+  const onChange = (field, value) => {
+    setSignUpForm({ ...signUpForm, [field]: value });
   };
 
   return (
@@ -44,13 +61,13 @@ function Login(props) {
             }
           >
             <label
-              className={tab === 1 && styles.selected}
+              className={tab === 1 ? styles.selected : undefined}
               onClick={() => setTab(1)}
             >
               Sign In
             </label>
             <label
-              className={tab === 2 && styles.selected}
+              className={tab === 2 ? styles.selected : undefined}
               onClick={() => setTab(2)}
             >
               Sign up
@@ -98,21 +115,21 @@ function Login(props) {
                   placeholder="Nom du Centre"
                   type="text"
                   onChange={(e) => {
-                    changeHandler("email", e.target.value);
+                    onChange("name", e.target.value);
                   }}
                 />
                 <input
                   placeholder="Email"
                   type="email"
                   onChange={(e) => {
-                    changeHandler("email", e.target.value);
+                    onChange("email", e.target.value);
                   }}
                 />
                 <input
                   placeholder="Mot de passe"
                   type="password"
                   onChange={(e) => {
-                    changeHandler("password", e.target.value);
+                    onChange("password", e.target.value);
                   }}
                 />
                 <button
